@@ -44,49 +44,4 @@ public class SimpleController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("/createLogs")
-    public ResponseEntity createLogs() {
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000000; i++) {
-                    LOGGER.info("Generating Suraj info logs");
-                }
-            }
-        }).start();
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000000; i++) {
-                    LOGGER.debug("Generating Suraj debug logs");
-                }
-            }
-        }).start();
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000000; i++) {
-                    LOGGER.trace("Generating Suraj trace logs");
-                }
-            }
-        }).start();
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000000; i++) {
-                    LOGGER.warn("Generating Suraj warn logs");
-                }
-            }
-        }).start();
-
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                for (int i = 0; i < 1000000; i++) {
-                    LOGGER.error("Generating Suraj error logs");
-                }
-            }
-        }).start();
-        return new ResponseEntity(HttpStatus.OK);
-    }
 }
