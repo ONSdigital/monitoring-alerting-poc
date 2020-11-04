@@ -4,12 +4,15 @@
 
 * Docker
 * Change scrape_configs.static_configs.targets ip with your private machine ip in prometheus.yml file
+* Install promtail binary on your machine and follow the link [https://grafana.com/docs/loki/latest/clients/promtail/installation/](https://grafana.com/docs/loki/latest/clients/promtail/installation/) 
+
+
 
 ## Running
 
 1. Configure *alertmanager.yml* with your Gmail address and app
 password (if you want alerts to be sent to your email address)
-1. Run `docker-compose up`
+2. Run `docker-compose up`
 
 ## Using
 
