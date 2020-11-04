@@ -6,7 +6,34 @@
 * Change scrape_configs.static_configs.targets ip with your private machine ip in prometheus.yml file
 * Install promtail binary on your machine and follow the link [https://grafana.com/docs/loki/latest/clients/promtail/installation/](https://grafana.com/docs/loki/latest/clients/promtail/installation/) 
 
+Example of config.file
+—————————————————
 
+```
+server:
+http_listen_port: 9080
+grpc_listen_port: 0
+positions:
+filename: /tmp/positions.yaml
+
+clients:
+- url: http://127.0.0.1:3100/loki/api/v1/push
+
+scrape_configs:
+
+- job_name: my-log-shipper
+static_configs:
+- targets:
+- localhost
+labels:
+job: my-logging-monitoring-example
+name: my-logging-monitoring
+app: my-logging
+service: my-logging-svc
+agent: promtail
+__path__: /opts/logs/my-file.log
+```
+—————————————————————
 
 ## Running
 
