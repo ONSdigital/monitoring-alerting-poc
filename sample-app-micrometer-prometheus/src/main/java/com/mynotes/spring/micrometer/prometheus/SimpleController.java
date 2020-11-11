@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.logging.LogManager;
+import java.util.Random;
+
 
 @RestController
 public class SimpleController {
@@ -29,7 +30,7 @@ public class SimpleController {
 
     @GetMapping("/hello500")
     public ResponseEntity hello500() {
-        LOGGER.info( "This is 500 HTTP status call");
+        LOGGER.error( "This is 500 HTTP status call");
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -43,5 +44,51 @@ public class SimpleController {
         }
         return new ResponseEntity(HttpStatus.OK);
     }
-
+    @GetMapping("/createLogs")
+    public ResponseEntity createLogs() {
+        final int count = 100;
+        final String mgs = "Generating fsdr {} logs";
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for (int i = 0; i < new Random().nextInt(10) * count; i++) {
+                    LOGGER.info(mgs, "info");
+                }
+            }
+        }).start();
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for (int i = 0; i < new Random().nextInt(10) * count; i++) {
+                    LOGGER.debug(mgs , "debug");
+                }
+            }
+        }).start();
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for (int i = 0; i < new Random().nextInt(10) * count; i++) {
+                    LOGGER.trace(mgs, "trace");
+                }
+            }
+        }).start();
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for (int i = 0; i < new Random().nextInt(10) * count; i++) {
+                    LOGGER.warn(mgs, "warn");
+                }
+            }
+        }).start();
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                for (int i = 0; i < new Random().nextInt(10) * count; i++) {
+                    LOGGER.error(mgs, "error");
+                }
+            }
+        }).start();
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    
 }
